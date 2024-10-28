@@ -14,7 +14,24 @@
         @else
             <ul>
                 @foreach($messages as $message)
-                    <li>{{ $message->text }}</li>
+                    <li>
+                        @if($message['subrayado']&&$message['negrita'])
+                        <u><b>
+                            {{ $message->text }}
+                        </b></u>
+                        @elseif($message['subrayado'])
+                        <u>
+                            {{$message->text}}
+                        </u>
+                        @elseif($message['negrita'])
+                        <u>
+                            {{$message->text}}
+                        </u>
+                        @else
+                        {{$message->text}}
+                        @endif
+                        <button onclick={{route('editMessage',($message->id))}}>Editar</button>
+                    </li>
                 @endforeach
             </ul>
         @endif
